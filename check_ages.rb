@@ -7,6 +7,13 @@ def check_ages?(data, sex, age_is_greater_than)
   false
 end
 
+def refactored_check_ages?(data, sex, age_is_older_than)
+  data.all? { |d| d[:sex] != sex || d[:age] > age_is_older_than }
+  # first condition eliminates the sex we're not looking at
+  # second condition handles the age comparison
+  # AWESOME!
+end
+
 RSpec.configure do |config|
   # Use color in STDOUT
   config.color_enabled = true
@@ -19,7 +26,7 @@ RSpec.configure do |config|
   config.formatter = :progress # :progress, :html, :textmate
 end
 
-describe '#check_ages?' do
+describe '#refactored_check_ages?' do
 
   let(:data) {
     [
@@ -32,12 +39,12 @@ describe '#check_ages?' do
   } 
 
   it 'returns true if all of the data items matching the sex value have ages greater than the value provided' do
-    expect(check_ages?(data, :f, 22)).to be true
-    expect(check_ages?(data, :m, 30)).to be true
+    expect(refactored_check_ages?(data, :f, 22)).to be true
+    expect(refactored_check_ages?(data, :m, 30)).to be true
   end
 
   it 'returns false if not all of the data items matching the sex value have ages greater than the value provided' do
-    expect(check_ages?(data, :f, 23)).to be false
-    expect(check_ages?(data, :m, 40)).to be false
+    expect(refactored_check_ages?(data, :f, 23)).to be false
+    expect(refactored_check_ages?(data, :m, 40)).to be false
   end
 end
