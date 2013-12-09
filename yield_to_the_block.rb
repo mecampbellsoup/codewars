@@ -1,4 +1,4 @@
-require 'rspec'
+require_relative 'spec_helper'
 
 def compute(&block)
   if block
@@ -6,18 +6,6 @@ def compute(&block)
   else
     "Do not compute"
   end
-end
-
-RSpec.configure do |config|
-  # Use color in STDOUT
-  config.color_enabled = true
-
-  # Use color not only in STDOUT but also in pagers and files
-  config.tty = true
-  config.order = 'random'
-
-  # Use the specified formatter
-  config.formatter = :progress # :progress, :html, :textmate
 end
 
 describe '#compute' do

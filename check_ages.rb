@@ -1,4 +1,4 @@
-require 'rspec'
+require_relative 'spec_helper'
 
 def check_ages?(data, sex, age_is_greater_than)
   to_check = data.select { |d| d[:sex] == sex } # now I have an array of the same-gender hashes
@@ -12,18 +12,6 @@ def refactored_check_ages?(data, sex, age_is_older_than)
   # first condition eliminates the sex we're not looking at
   # second condition handles the age comparison
   # AWESOME!
-end
-
-RSpec.configure do |config|
-  # Use color in STDOUT
-  config.color_enabled = true
-
-  # Use color not only in STDOUT but also in pagers and files
-  config.tty = true
-  config.order = 'random'
-
-  # Use the specified formatter
-  config.formatter = :progress # :progress, :html, :textmate
 end
 
 describe '#refactored_check_ages?' do

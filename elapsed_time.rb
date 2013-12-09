@@ -1,3 +1,5 @@
+require_relative 'spec_helper'
+
 # Complete the function so that it returns the number of seconds that have elapsed between the start and end times given.
 
 # Tips:
@@ -7,18 +9,6 @@
 
 def elapsed_seconds(start_time, end_time)
   Integer(end_time - start_time)
-end
-
-RSpec.configure do |config|
-  # Use color in STDOUT
-  config.color_enabled = true
-
-  # Use color not only in STDOUT but also in pagers and files
-  config.tty = true
-  config.order = 'random'
-
-  # Use the specified formatter
-  config.formatter = :progress # :progress, :html, :textmate
 end
 
 describe '#elapsed seconds' do
