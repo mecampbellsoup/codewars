@@ -9,6 +9,13 @@ class Array
   def freq
     inject(Hash.new(0)) { |h,v| h[v] += 1; h }
   end
+
+  def subtract_once(values)
+    h = values.inject({}) do |memo, v|
+      memo[v] ||= 0; memo[v] += 1; memo
+    end
+    reject { |e| h.include?(e) && (h[e] -= 1) >= 0 }
+  end
 end
 
 def score(dice)
@@ -20,11 +27,10 @@ def score(dice)
   score = 0
   mode = nil
   # If a triple is present, add it to the score and remove those 3 elements from dice
-  if dice.uniq.size <= 3
-    binding.pry if dice == [1, 1, 1, 5, 1]
+  if dice.uniq.size <= 3 && dice.mode.size == 1
     mode = dice.mode.keys.first
     score += triples_hash[mode]
-    3.times { dice.delete(mode) }
+    dice = dice.subtract_once([mode]*3)
   end
   # Check all values in dice - skip if it's already counted for in a triple - else score as a single
   dice.each do |value|
